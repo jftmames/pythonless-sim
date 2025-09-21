@@ -1,9 +1,10 @@
+
 import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Simulador Pythonless",
-  description: "Simula qué hace Python al ejecutar código, sin ejecutar Python.",
+  description: "Simula qué hace Python sin ejecutarlo.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
