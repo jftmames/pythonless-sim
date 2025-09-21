@@ -1,8 +1,7 @@
 import { Lesson } from "@/lib/types";
-import { makeStep } from "@/lib/builder"; // <-- LÍNEA AÑADIDA
+import { makeStep, resetStepCounter } from "@/lib/builder"; // <-- ¡ESTA ES LA LÍNEA CLAVE!
 
-// El resto del archivo ya no es válido porque está mal estructurado.
-// Aquí está la versión completa y correcta del archivo:
+resetStepCounter();
 
 const code = `import hashlib, json
 from pathlib import Path
