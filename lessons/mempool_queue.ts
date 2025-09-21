@@ -1,5 +1,5 @@
 import { Lesson } from "@/lib/types";
-import { makeStep, resetStepCounter } from "@/lib/builder"; // <-- ¡ESTA LÍNEA LO SOLUCIONA!
+import { makeStep, resetStepCounter } from "@/lib/builder"; // <-- Línea necesaria
 
 resetStepCounter();
 
