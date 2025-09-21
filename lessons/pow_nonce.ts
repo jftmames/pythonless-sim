@@ -1,5 +1,6 @@
 import { Lesson } from "@/lib/types";
 import { makeStep, resetStepCounter } from "@/lib/builder";
+
 resetStepCounter();
 
 const code = `dificultad = 3
@@ -7,12 +8,13 @@ nonce = 0
 hash = ""
 while not hash.startswith("0"*dificultad):
     nonce += 1
-    hash = "0" * (nonce == 3 and 3 or 2) + "abc"
+    # hash = sha256(cabecera + str(nonce)).hexdigest()  # simulado
+    hash = "0" * (nonce == 3 ? 3 : 2) + "abc"         # hack didáctico
 print("Bloque minado con nonce", nonce)`;
 
 const lesson: Lesson = {
-  title: "Prueba de trabajo (PoW)",
-  description: "Simulación de cómo se busca un nonce válido.",
+  title: "Prueba de Trabajo: encontrar nonce (simulado)",
+  description: "Visualiza el bucle que busca un hash con prefijo de ceros, sin SHA real.",
   code,
   steps: [
     makeStep({
@@ -45,4 +47,3 @@ const lesson: Lesson = {
   ],
 };
 export default lesson;
-
