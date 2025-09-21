@@ -1,5 +1,5 @@
 import { Lesson } from "@/lib/types";
-import { makeStep, resetStepCounter } from "@/lib/builder";
+import { makeStep, resetStepCounter } from "@/lib/builder"; // <-- ¡ESTA LÍNEA LO SOLUCIONA!
 
 resetStepCounter();
 
@@ -63,4 +63,3 @@ const lesson: Lesson = {
 };
 
 export default lesson;
-
