@@ -1,9 +1,9 @@
 import { Lesson } from "@/lib/types";
-import { makeStep, resetStepCounter } from "@/lib/builder"; // <-- ESTA LÍNEA LO ARREGLA
+import { makeStep, resetStepCounter } from "@/lib/builder"; // <-- ¡ESTA LÍNEA ARREGLA TODO!
 
 resetStepCounter();
 
-const code = \`import hashlib, json
+const code = `import hashlib, json
 from pathlib import Path
 
 archivo = Path("data/contrato_demo.pdf")
@@ -12,7 +12,7 @@ h = hashlib.sha256()
 h.update(datos)
 huella = h.hexdigest()
 acta = {"sha256": huella, "custodio": "Perito X"}
-print(json.dumps(acta))\`;
+print(json.dumps(acta))`;
 
 const lesson: Lesson = {
   title: "Acta de evidencia: generar huella SHA-256 (simulado)",
@@ -37,8 +37,7 @@ const lesson: Lesson = {
       appLaw: "Trazabilidad del documento en el acta.",
       state: { globals: { archivo: "Path('data/contrato_demo.pdf')" } }
     }),
-    // ... (el resto de los pasos que ya tenías)
-     makeStep({
+    makeStep({
       highlight: { line: 4 },
       code: "datos = b'%PDF-...'",
       what: "Bytes del contrato (simulados).",
@@ -90,7 +89,7 @@ const lesson: Lesson = {
       why: "Formato interoperable para archivar/compartir.",
       appData: "APIs y data lakes.",
       appLaw: "Adjuntar al expediente y verificar en juicio.",
-      state: { io: { out: ["{\\"sha256\\": \\"9f2a…\\", \\"custodio\\": \\"Perito X\\"}"] } }
+      state: { io: { out: ["{\"sha256\": \"9f2a…\", \"custodio\": \"Perito X\"}"] } }
     })
   ]
 };
