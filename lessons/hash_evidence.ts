@@ -1,1 +1,69 @@
+import { Lesson } from "@/lib/types";
+makeStep({
+highlight: { line: 3 },
+code: "archivo = Path('data/contrato_demo.pdf')",
+what: "Referencia al documento a custodiar.",
+why: "Trabajar con objetos ruta ofrece métodos seguros y claros.",
+appData: "Rutas coherentes en pipelines de datos.",
+appLaw: "Trazabilidad del documento en el acta.",
+state: { globals: { archivo: "Path('data/contrato_demo.pdf')" } }
+}),
+makeStep({
+highlight: { line: 4 },
+code: "datos = b'%PDF-...'",
+what: "Bytes del contrato (simulados).",
+why: "El hash opera sobre bytes exactos.",
+appData: "Reproducibilidad de huellas.",
+appLaw: "Cualquier cambio de 1 bit altera la huella.",
+state: { globals: { datos: "b'%PDF-...'" } }
+}),
+makeStep({
+highlight: { line: 5 },
+code: "h = hashlib.sha256()",
+what: "Crea el objeto de hash.",
+why: "Permite alimentar datos por bloques y luego obtener la huella.",
+appData: "Procesar ficheros grandes por chunks.",
+appLaw: "Algoritmo aceptado para integridad probatoria.",
+state: { globals: { h: "<sha256 object>" } }
+}),
+makeStep({
+highlight: { line: 6 },
+code: "h.update(datos)",
+what: "Introduce los bytes en el cálculo.",
+why: "Separar carga de datos y digest facilita auditoría.",
+appData: "Control de versiones de datos.",
+appLaw: "Registra qué entrada exacta generó la huella.",
+state: { io: { log: ["update(datos) aplicado"] } }
+}),
+makeStep({
+highlight: { line: 7 },
+code: "huella = h.hexdigest()",
+what: "Obtiene la huella en hex.",
+why: "Formato portable y legible.",
+appData: "Se usa en catálogos de datos.",
+appLaw: "Se incluye en el acta para verificación.",
+state: { globals: { huella: "'9f2a…' (simulada)" } }
+}),
+makeStep({
+highlight: { line: 8 },
+code: "acta = { 'sha256': huella, 'custodio': 'Perito X' }",
+what: "Construye el registro probatorio.",
+why: "Estructurar datos evita ambigüedades.",
+appData: "Diccionarios → registros claros.",
+appLaw: "Base de la cadena de custodia.",
+state: { globals: { acta: "{ 'sha256': '9f2a…', 'custodio': 'Perito X' }" } }
+}),
+makeStep({
+highlight: { line: 9 },
+code: "print(json.dumps(acta))",
+what: "Serializa el acta a JSON.",
+why: "Formato interoperable para archivar/compartir.",
+appData: "APIs y data lakes.",
+appLaw: "Adjuntar al expediente y verificar en juicio.",
+state: { io: { out: ["{\"sha256\": \"9f2a…\", \"custodio\": \"Perito X\"}"] } }
+})
+]
+};
 
+
+export default lesson;
