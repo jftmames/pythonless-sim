@@ -1,5 +1,6 @@
 import { Lesson } from "@/lib/types";
 import { makeStep, resetStepCounter } from "@/lib/builder";
+
 resetStepCounter();
 
 const code = `mempool = []
@@ -24,12 +25,30 @@ const lesson: Lesson = {
     }),
     makeStep({
       highlight: { line: 2 },
-      code: "append tx1",
+      code: 'mempool.append({"id":1,"fee":120})',
       what: "Añade transacción con fee 120.",
       why: "Registrar en la cola.",
       appData: "Back-pressure.",
       appLaw: "Trazabilidad.",
-      state: { globals: { mempool: "[{id:1,fee:120}]" } },
+      state: { globals: { mempool: '[{"id":1,"fee":120}]' } },
+    }),
+     makeStep({
+      highlight: { line: 3 },
+      code: 'mempool.append({"id":2,"fee":80})',
+      what: "Añade transacción con fee 80.",
+      why: "Registrar en la cola.",
+      appData: "Back-pressure.",
+      appLaw: "Trazabilidad.",
+      state: { globals: { mempool: '[{"id":1,"fee":120}, {"id":2,"fee":80}]' } },
+    }),
+    makeStep({
+      highlight: { line: 4 },
+      code: "next_tx = mempool.pop(0)",
+      what: "Saca el primer elemento de la cola.",
+      why: "Procesar en orden de llegada (FIFO).",
+      appData: "Scheduler simple.",
+      appLaw: "Prioridad temporal.",
+      state: { globals: { mempool: '[{"id":2,"fee":80}]', next_tx: '{"id":1,"fee":120}' } },
     }),
     makeStep({
       highlight: { line: 5 },
@@ -38,7 +57,7 @@ const lesson: Lesson = {
       why: "Ejecución del scheduler.",
       appData: "Logs.",
       appLaw: "Transparencia de mempool.",
-      state: { io: { out: ['{id:1, fee:120}'] } },
+      state: { io: { out: ['{"id":1, "fee":120}'] } },
     }),
   ],
 };
